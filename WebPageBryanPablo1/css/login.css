@@ -1,0 +1,48 @@
+﻿
+.login-section {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+    background-color: #eaf3fc;
+}
+
+.login-card {
+    border: none;
+    border-radius: 15px;
+}
+
+.login-icon {
+    color: #1769aa;
+    font-size: 55px;
+}
+
+.login-card .form-control {
+    padding: 12px;
+    border-radius: 7px;
+}
+
+    .login-card .form-control:focus {
+        border-color: #1769aa;
+        box-shadow: 0 0 0 0.2rem rgba(23, 105, 170, 0.15);
+    }
+
+.login-card .btn-primary {
+    background-color: #1769aa;
+    border-color: #1769aa;
+}
+
+    .login-card .btn-primary:hover {
+        background-color: #123b65;
+        border-color: #123b65;
+    }
+
+@media (max-width: 576px) {
+    .login-section {
+        padding: 35px 0;
+    }
+
+    .login-card .card-body {
+        padding: 25px !important;
+    }
+}

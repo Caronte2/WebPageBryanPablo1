@@ -11,7 +11,7 @@ namespace WebPageBryanPablo1.Pages
 {
 
 
-    public partial class Doctor
+    public partial class doctor
     {
 
         /// <summary>

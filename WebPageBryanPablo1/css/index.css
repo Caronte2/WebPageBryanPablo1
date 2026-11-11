@@ -1,0 +1,64 @@
+﻿
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f8fc;
+}
+
+.main-navbar {
+    background-color: #123b65;
+}
+
+.login-button {
+    color: #123b65;
+    font-weight: bold;
+}
+
+.hero-section {
+    background-color: #eaf3fc;
+    padding: 90px 0;
+}
+
+.main-title {
+    color: #123b65;
+}
+
+.hero-section img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.services-section {
+    background-color: #ffffff;
+}
+
+.service-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s;
+}
+
+    .service-card:hover {
+        transform: translateY(-5px);
+    }
+
+.card-title {
+    color: #1769aa;
+}
+
+.main-footer {
+    background-color: #123b65;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 50px 0;
+        text-align: center;
+    }
+
+        .hero-section img {
+            max-height: 280px;
+        }
+}

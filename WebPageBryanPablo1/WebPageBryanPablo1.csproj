@@ -67,8 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\index.css" />
+    <Content Include="css\login.css" />
     <Content Include="index.aspx" />
-    <Content Include="Pages\Doctor.aspx" />
+    <Content Include="Pages\doctor.aspx" />
+    <Content Include="Pages\login.aspx" />
     <Content Include="Pages\patient.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -80,12 +83,19 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Doctor.aspx.cs">
-      <DependentUpon>Doctor.aspx</DependentUpon>
+    <Compile Include="Pages\doctor.aspx.cs">
+      <DependentUpon>doctor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Doctor.aspx.designer.cs">
-      <DependentUpon>Doctor.aspx</DependentUpon>
+    <Compile Include="Pages\doctor.aspx.designer.cs">
+      <DependentUpon>doctor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\patient.aspx.cs">
       <DependentUpon>patient.aspx</DependentUpon>
@@ -105,9 +115,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="css\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
