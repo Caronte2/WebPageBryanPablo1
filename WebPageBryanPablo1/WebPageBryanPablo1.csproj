@@ -73,6 +73,7 @@
     <Content Include="css\index.css" />
     <Content Include="css\login.css" />
     <Content Include="index.aspx" />
+    <Content Include="Pages\administrator.aspx" />
     <Content Include="Pages\doctor.aspx" />
     <Content Include="Pages\login.aspx" />
     <Content Include="Pages\patient.aspx" />
@@ -86,6 +87,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\administrator.aspx.cs">
+      <DependentUpon>administrator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\administrator.aspx.designer.cs">
+      <DependentUpon>administrator.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\doctor.aspx.cs">
       <DependentUpon>doctor.aspx</DependentUpon>
