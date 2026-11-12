@@ -18,71 +18,14 @@ namespace WebPageBryanPablo1.Pages
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string DBpath = Server.MapPath("~/Bbdd/data.db");
+            string DBpath = Server.MapPath("~/bbdd/data.db");
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
             conn.Open();
 
-            string pin = Request.Form["Pin"];
-            string pass = Request.Form["Password"];
-            if (!string.IsNullOrEmpty(pin))
-            {
-                if (itemvalue == "2")
-                {
+            string Username = Request.Form["Username"];
+            string PasswordHash = Request.Form["PasswordHash"];
+            
 
-                    string query = "SELECT PIN, Password from patients where PIN = @pin AND Password = @pass";
-                    SQLiteCommand comm = new SQLiteCommand(query, conn);
-                    comm.Parameters.Add(new SQLiteParameter("@pin", DbType.String) { Value = pin.Trim() });
-                    comm.Parameters.Add(new SQLiteParameter("@pass", DbType.String) { Value = pass.Trim() });
-
-                    SQLiteDataReader reader = comm.ExecuteReader();
-                    bool res = reader.HasRows;
-                    conn.Close();
-                    if (res)
-                    {
-                        Session["Pin"] = pin;
-                        Session["itemvalue"] = itemvalue;
-                        Response.Redirect("./Users/Patient.aspx");
-
-                    }
-                    else
-                    {
-                        lblError.Text = "The PIN or the password are incorrect. Please, try again.";
-                        lblError.Visible = true;
-                        return;
-                    }
-                }
-                else if (itemvalue == "1")
-                {
-                    string query = "SELECT PIN, Password from doctors where PIN = @pin AND Password = @pass";
-                    SQLiteCommand comm = new SQLiteCommand(query, conn);
-                    comm.Parameters.Add(new SQLiteParameter("@pin", DbType.String) { Value = pin.Trim() });
-                    comm.Parameters.Add(new SQLiteParameter("@pass", DbType.String) { Value = pass.Trim() });
-
-                    SQLiteDataReader reader = comm.ExecuteReader();
-
-                    bool res = reader.HasRows;
-                    conn.Close();
-                    if (res)
-                    {
-                        Session["Pin"] = pin;
-                        Session["itemvalue"] = itemvalue;
-                        Response.Redirect("./Users/Doctor.aspx");
-
-                    }
-                    else
-                    {
-                        lblError.Text = "The PIN or the password are incorrect. Please, try again.";
-                        lblError.Visible = true;
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                lblError.Text = "Please, enter a PIN.";
-                lblError.Visible = true;
-                return;
-            }
         }
     }
 }
