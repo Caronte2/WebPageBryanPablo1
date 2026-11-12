@@ -24,8 +24,6 @@
 
     <form id="form1" runat="server">
 
-        <!-- NAVIGATION BAR -->
-
         <nav class="navbar navbar-expand-lg navbar-dark main-navbar">
 
             <div class="container">
@@ -74,7 +72,6 @@
 
         </nav>
 
-        <!-- LOGIN SECTION -->
 
         <main class="login-section">
 
@@ -88,7 +85,6 @@
 
                             <div class="card-body p-4 p-md-5">
 
-                                <!-- LOGIN HEADER -->
 
                                 <div class="text-center mb-4">
 
@@ -106,17 +102,7 @@
 
                                 </div>
 
-                                <!-- VALIDATION SUMMARY -->
-
-                                <asp:ValidationSummary
-                                    ID="ValidationSummary1"
-                                    runat="server"
-                                    ValidationGroup="Login"
-                                    CssClass="alert alert-danger"
-                                    HeaderText="Please check the following errors:"
-                                    DisplayMode="BulletList" />
-
-                                <!-- USER ID -->
+                    
 
                                 <div class="mb-3">
 
@@ -135,19 +121,7 @@
                                         placeholder="Enter your ID number">
                                     </asp:TextBox>
 
-                                    <asp:RequiredFieldValidator
-                                        ID="rfvUserID"
-                                        runat="server"
-                                        ControlToValidate="txtUserID"
-                                        ErrorMessage="User ID is required."
-                                        CssClass="text-danger small"
-                                        Display="Dynamic"
-                                        ValidationGroup="Login">
-                                    </asp:RequiredFieldValidator>
-
                                 </div>
-
-                                <!-- PASSWORD -->
 
                                 <div class="mb-4">
 
@@ -167,19 +141,9 @@
                                         placeholder="Enter your password">
                                     </asp:TextBox>
 
-                                    <asp:RequiredFieldValidator
-                                        ID="rfvPassword"
-                                        runat="server"
-                                        ControlToValidate="txtPassword"
-                                        ErrorMessage="Password is required."
-                                        CssClass="text-danger small"
-                                        Display="Dynamic"
-                                        ValidationGroup="Login">
-                                    </asp:RequiredFieldValidator>
 
                                 </div>
 
-                                <!-- ERROR MESSAGE -->
 
                                 <asp:Label
                                     ID="lblMessage"
@@ -188,7 +152,6 @@
                                     EnableViewState="false">
                                 </asp:Label>
 
-                                <!-- LOGIN BUTTON -->
 
                                 <asp:Button
                                     ID="btnLogin"
@@ -198,7 +161,6 @@
                                     ValidationGroup="Login"
                                     OnClick="btnLogin_Click" />
 
-                                <!-- BACK TO HOME -->
 
                                 <div class="text-center mt-4">
 
@@ -206,8 +168,7 @@
                                         Access reserved for authorised users.
                                     </p>
 
-                                    <a href="../index.aspx"
-                                       class="text-decoration-none">
+                                    <a href="../index.aspx" class="back-home">
                                         <i class="bi bi-arrow-left me-1"></i>
                                         Back to Home
                                     </a>
@@ -225,8 +186,6 @@
             </div>
 
         </main>
-
-        <!-- FOOTER -->
 
         <footer class="main-footer py-4">
 
