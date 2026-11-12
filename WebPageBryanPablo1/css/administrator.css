@@ -1,0 +1,262 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f8fc;
+    color: #263445;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+
+.main-navbar {
+    background-color: #123b65;
+    padding: 15px 0;
+    width: 100%;
+}
+
+    .main-navbar .navbar-brand {
+        color: #ffffff;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+    .main-navbar .nav-link {
+        color: #ffffff;
+        margin-left: 15px;
+        transition: 0.3s;
+    }
+
+        .main-navbar .nav-link:hover {
+            color: #8ec9ff;
+        }
+
+.admin-label {
+    font-weight: 600;
+}
+
+.logout-link {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 7px;
+    padding: 8px 14px !important;
+}
+
+/* Main content */
+
+.admin-container {
+    min-height: 85vh;
+    background-color: #eaf3fc;
+}
+
+.welcome-section h1 {
+    color: #123b65;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.welcome-section p {
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+/* Statistics cards */
+
+.stat-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 3px 12px rgba(18, 59, 101, 0.06);
+    height: 100%;
+}
+
+.stat-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.doctors-icon {
+    background-color: #e2efff;
+    color: #1769aa;
+}
+
+.patients-icon {
+    background-color: #e2f5ee;
+    color: #198754;
+}
+
+.users-icon {
+    background-color: #f0eaff;
+    color: #7952b3;
+}
+
+.stat-card p {
+    color: #64748b;
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+.stat-card h3 {
+    color: #123b65;
+    font-size: 27px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Content cards */
+
+.content-card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(18, 59, 101, 0.06);
+}
+
+.card-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+    .card-heading h4 {
+        color: #123b65;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .card-heading p {
+        color: #64748b;
+        font-size: 13px;
+        margin: 0;
+    }
+
+.heading-icon {
+    color: #1769aa;
+    font-size: 30px;
+}
+
+/* Forms */
+
+.form-label {
+    color: #263445;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-control,
+.form-select {
+    padding: 11px 12px;
+    border: 1px solid #d6e0eb;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #1769aa;
+        box-shadow: 0 0 0 0.2rem rgba(23, 105, 170, 0.15);
+    }
+
+/* Buttons */
+
+.btn-primary {
+    background-color: #1769aa;
+    border-color: #1769aa;
+    padding: 11px;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #123b65;
+        border-color: #123b65;
+    }
+
+/* Tables */
+
+.admin-table {
+    width: 100%;
+    margin-bottom: 0;
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+    .admin-table th {
+        background-color: #eaf3fc;
+        color: #123b65;
+        font-weight: bold;
+        padding: 13px 10px;
+        white-space: nowrap;
+    }
+
+    .admin-table td {
+        color: #43546a;
+        padding: 13px 10px;
+    }
+
+    .admin-table tr {
+        border-bottom: 1px solid #edf1f5;
+    }
+
+        .admin-table tr:last-child {
+            border-bottom: none;
+        }
+
+/* Messages */
+
+.message-label {
+    display: block;
+    font-size: 13px;
+    margin-top: 10px;
+    color: #dc3545;
+}
+
+/* Footer */
+
+.main-footer {
+    background-color: #123b65;
+    color: #ffffff;
+    text-align: center;
+    padding: 18px;
+}
+
+    .main-footer p {
+        margin: 0;
+        font-size: 13px;
+    }
+
+/* Responsive design */
+
+@media (max-width: 991px) {
+    .main-navbar .nav-link {
+        margin-left: 0;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .welcome-section h1 {
+        font-size: 24px;
+    }
+
+    .content-card {
+        padding: 18px;
+    }
+
+    .stat-card {
+        padding: 17px;
+    }
+
+    .main-navbar .navbar-brand {
+        font-size: 20px;
+    }
+}

@@ -27,7 +27,7 @@ namespace WebPageBryanPablo1.Pages
 
             try
             {
-                string DBpath = Server.MapPath("~/bbdd/data.db");
+                string DBpath = Server.MapPath("~/bbdd/healthcentre.db");
 
                 using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
                 {
