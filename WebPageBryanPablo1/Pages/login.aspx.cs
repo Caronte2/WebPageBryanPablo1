@@ -93,7 +93,7 @@ namespace WebPageBryanPablo1.Pages
             using (MD5 md5Hash = MD5.Create())
             {
                 byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(data).Replace("-", "");
+                return BitConverter.ToString(data).Replace("-", "").ToLowerInvariant();
             }
         }
     }
