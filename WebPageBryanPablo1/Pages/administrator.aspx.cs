@@ -140,7 +140,6 @@ namespace WebPageBryanPablo1.Pages
             {
                 lblTotalDoctors.Text = GetCount(connection, "Doctors").ToString();
                 lblTotalPatients.Text = GetCount(connection, "Patients").ToString();
-                lblTotalUsers.Text = GetCount(connection, "Users").ToString();
             }
         }
 
@@ -285,8 +284,8 @@ namespace WebPageBryanPablo1.Pages
                         command.Parameters.AddWithValue("@Mobile", user.PhoneNumber);
                         command.Parameters.AddWithValue("@Address", user.Address);
                         command.Parameters.AddWithValue("@DateOfBirth", txtDateOfBirth.Text);
-                        command.Parameters.AddWithValue("@DoctorId",
-                            Convert.ToInt32(ddlDoctor.SelectedValue));
+                        command.Parameters.AddWithValue(
+                            "@DoctorId", Convert.ToInt32(ddlDoctor.SelectedValue));
 
                         command.ExecuteNonQuery();
                     }
@@ -295,8 +294,8 @@ namespace WebPageBryanPablo1.Pages
                 transaction.Commit();
             }
 
-            ShowMessage("User created successfully.", false);
             FinishOperation();
+            ShowMessage("User created successfully.", false);
         }
 
         private void UpdateUser()
@@ -314,7 +313,8 @@ namespace WebPageBryanPablo1.Pages
 
                 if (string.IsNullOrWhiteSpace(txtNewPassword.Text))
                 {
-                    userQuery = "UPDATE Users SET DNI = @DNI WHERE UserId = @UserId";
+                    userQuery =
+                        "UPDATE Users SET DNI = @DNI WHERE UserId = @UserId";
                 }
                 else
                 {
@@ -383,13 +383,14 @@ namespace WebPageBryanPablo1.Pages
                 transaction.Commit();
             }
 
-            ShowMessage("User updated successfully.", false);
             FinishOperation();
+            ShowMessage("User updated successfully.", false);
         }
 
         protected void gvDoctors_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName != "EditDoctor")
+            if (e.CommandName != "EditDoctor" &&
+                e.CommandName != "DeleteDoctor")
                 return;
 
             int rowIndex = Convert.ToInt32(e.CommandArgument);
@@ -400,12 +401,31 @@ namespace WebPageBryanPablo1.Pages
             int userId = Convert.ToInt32(
                 gvDoctors.DataKeys[rowIndex].Values["UserId"]);
 
-            LoadDoctorForEditing(doctorId, userId);
+            try
+            {
+                if (e.CommandName == "EditDoctor")
+                {
+                    LoadDoctorForEditing(doctorId, userId);
+                }
+                else
+                {
+                    DeleteDoctor(doctorId, userId);
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                ShowMessage("Database error: " + ex.Message, true);
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(ex.Message, true);
+            }
         }
 
         protected void gvPatients_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName != "EditPatient")
+            if (e.CommandName != "EditPatient" &&
+                e.CommandName != "DeletePatient")
                 return;
 
             int rowIndex = Convert.ToInt32(e.CommandArgument);
@@ -416,7 +436,25 @@ namespace WebPageBryanPablo1.Pages
             int userId = Convert.ToInt32(
                 gvPatients.DataKeys[rowIndex].Values["UserId"]);
 
-            LoadPatientForEditing(patientId, userId);
+            try
+            {
+                if (e.CommandName == "EditPatient")
+                {
+                    LoadPatientForEditing(patientId, userId);
+                }
+                else
+                {
+                    DeletePatient(patientId, userId);
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                ShowMessage("Database error: " + ex.Message, true);
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(ex.Message, true);
+            }
         }
 
         private void LoadDoctorForEditing(int doctorId, int userId)
@@ -482,19 +520,23 @@ namespace WebPageBryanPablo1.Pages
                         if (!reader.Read())
                             return;
 
-                        ddlUserType.SelectedValue = "Patient";
-                        txtDNI.Text = reader["DNI"].ToString();
-                        txtFullName.Text = reader["FullName"].ToString();
-                        txtMobile.Text = reader["Mobile"].ToString();
-                        txtAddress.Text = reader["Address"].ToString();
-                        txtDateOfBirth.Text = Convert.ToDateTime(
-                            reader["DateOfBirth"]).ToString("yyyy-MM-dd");
-
-                        LoadDoctors();
-
+                        string dni = reader["DNI"].ToString();
+                        string fullName = reader["FullName"].ToString();
+                        string mobile = reader["Mobile"].ToString();
+                        string address = reader["Address"].ToString();
+                        string dateOfBirth = reader["DateOfBirth"].ToString();
                         string doctorId = reader["DoctorId"] == DBNull.Value
                             ? ""
                             : reader["DoctorId"].ToString();
+
+                        ddlUserType.SelectedValue = "Patient";
+                        txtDNI.Text = dni;
+                        txtFullName.Text = fullName;
+                        txtMobile.Text = mobile;
+                        txtAddress.Text = address;
+                        txtDateOfBirth.Text = dateOfBirth;
+
+                        LoadDoctors();
 
                         if (!string.IsNullOrEmpty(doctorId) &&
                             ddlDoctor.Items.FindByValue(doctorId) != null)
@@ -519,8 +561,104 @@ namespace WebPageBryanPablo1.Pages
             btnCancelEdit.Visible = true;
             ddlUserType.Enabled = false;
 
-            ScriptManager.RegisterStartupScript(
-                this, GetType(), "updateFields", "updateUserFields();", true);
+            ClientScript.RegisterStartupScript(
+                GetType(), "updateFields", "updateUserFields();", true);
+        }
+
+        private void DeleteDoctor(int doctorId, int userId)
+        {
+            using (SQLiteConnection connection = GetConnection())
+            using (SQLiteTransaction transaction = connection.BeginTransaction())
+            {
+                string checkQuery = @"
+                    SELECT COUNT(*)
+                    FROM MedicalRecords
+                    WHERE DoctorId = @DoctorId";
+
+                using (SQLiteCommand command =
+                    new SQLiteCommand(checkQuery, connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@DoctorId", doctorId);
+
+                    int records = Convert.ToInt32(command.ExecuteScalar());
+
+                    if (records > 0)
+                    {
+                        ShowMessage(
+                            "This doctor cannot be deleted because medical records are associated with them.",
+                            true);
+                        return;
+                    }
+                }
+
+                string deleteQuery =
+                    "DELETE FROM Users WHERE UserId = @UserId";
+
+                using (SQLiteCommand command =
+                    new SQLiteCommand(deleteQuery, connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@UserId", userId);
+
+                    if (command.ExecuteNonQuery() == 0)
+                    {
+                        ShowMessage("The doctor could not be found.", true);
+                        return;
+                    }
+                }
+
+                transaction.Commit();
+            }
+
+            FinishOperation();
+            ShowMessage("Doctor deleted successfully.", false);
+        }
+
+        private void DeletePatient(int patientId, int userId)
+        {
+            using (SQLiteConnection connection = GetConnection())
+            using (SQLiteTransaction transaction = connection.BeginTransaction())
+            {
+                string checkQuery = @"
+                    SELECT COUNT(*)
+                    FROM MedicalRecords
+                    WHERE PatientId = @PatientId";
+
+                using (SQLiteCommand command =
+                    new SQLiteCommand(checkQuery, connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@PatientId", patientId);
+
+                    int records = Convert.ToInt32(command.ExecuteScalar());
+
+                    if (records > 0)
+                    {
+                        ShowMessage(
+                            "This patient cannot be deleted because medical records are associated with them.",
+                            true);
+                        return;
+                    }
+                }
+
+                string deleteQuery =
+                    "DELETE FROM Users WHERE UserId = @UserId";
+
+                using (SQLiteCommand command =
+                    new SQLiteCommand(deleteQuery, connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@UserId", userId);
+
+                    if (command.ExecuteNonQuery() == 0)
+                    {
+                        ShowMessage("The patient could not be found.", true);
+                        return;
+                    }
+                }
+
+                transaction.Commit();
+            }
+
+            FinishOperation();
+            ShowMessage("Patient deleted successfully.", false);
         }
 
         protected void btnCancelEdit_Click(object sender, EventArgs e)
@@ -560,8 +698,8 @@ namespace WebPageBryanPablo1.Pages
             btnCreateUser.Text = "Create User";
             btnCancelEdit.Visible = false;
 
-            ScriptManager.RegisterStartupScript(
-                this, GetType(), "resetFields", "updateUserFields();", true);
+            ClientScript.RegisterStartupScript(
+                GetType(), "resetFields", "updateUserFields();", true);
         }
 
         private string HashPassword(string password)

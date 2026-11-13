@@ -42,15 +42,6 @@ namespace WebPageBryanPablo1.Pages
         protected global::System.Web.UI.WebControls.Label lblTotalPatients;
 
         /// <summary>
-        /// Control lblTotalUsers.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalUsers;
-
-        /// <summary>
         /// Control lblFormTitle.
         /// </summary>
         /// <remarks>

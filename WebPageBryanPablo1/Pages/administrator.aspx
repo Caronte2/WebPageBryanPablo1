@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="administrator.aspx.cs" Inherits="WebPageBryanPablo1.Pages.administrator" %>
+﻿
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="administrator.aspx.cs" Inherits="WebPageBryanPablo1.Pages.administrator" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,6 +40,7 @@
                                 Administrator
                             </span>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link logout-link" href="login.aspx">
                                 <i class="bi bi-box-arrow-right me-1"></i>
@@ -67,7 +69,9 @@
                             </div>
                             <div>
                                 <p>Total Doctors</p>
-                                <h3><asp:Label ID="lblTotalDoctors" runat="server" Text="0" /></h3>
+                                <h3>
+                                    <asp:Label ID="lblTotalDoctors" runat="server" Text="0" />
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -79,7 +83,9 @@
                             </div>
                             <div>
                                 <p>Total Patients</p>
-                                <h3><asp:Label ID="lblTotalPatients" runat="server" Text="0" /></h3>
+                                <h3>
+                                    <asp:Label ID="lblTotalPatients" runat="server" Text="0" />
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -88,10 +94,6 @@
                         <div class="stat-card">
                             <div class="stat-icon users-icon">
                                 <i class="bi bi-person-check"></i>
-                            </div>
-                            <div>
-                                <p>Total Users</p>
-                                <h3><asp:Label ID="lblTotalUsers" runat="server" Text="0" /></h3>
                             </div>
                         </div>
                     </div>
@@ -105,7 +107,9 @@
 
                             <div class="card-heading">
                                 <div>
-                                    <h4><asp:Label ID="lblFormTitle" runat="server" Text="Create User" /></h4>
+                                    <h4>
+                                        <asp:Label ID="lblFormTitle" runat="server" Text="Create User" />
+                                    </h4>
                                     <p>Register or update a doctor or patient.</p>
                                 </div>
                                 <i class="bi bi-person-plus heading-icon"></i>
@@ -227,13 +231,24 @@
 
                                         <asp:TemplateField HeaderText="Actions">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btnEditDoctor" runat="server"
-                                                    CssClass="btn btn-sm btn-edit"
-                                                    CommandName="EditDoctor"
-                                                    CommandArgument="<%# Container.DataItemIndex %>"
-                                                    CausesValidation="false">
-                                                    <i class="bi bi-pencil-square"></i> Edit
-                                                </asp:LinkButton>
+                                                <div class="action-buttons">
+                                                    <asp:LinkButton ID="btnEditDoctor" runat="server"
+                                                        CssClass="btn btn-sm btn-edit"
+                                                        CommandName="EditDoctor"
+                                                        CommandArgument="<%# Container.DataItemIndex %>"
+                                                        CausesValidation="false">
+                                                        <i class="bi bi-pencil-square"></i> Edit
+                                                    </asp:LinkButton>
+
+                                                    <asp:LinkButton ID="btnDeleteDoctor" runat="server"
+                                                        CssClass="btn btn-sm btn-delete"
+                                                        CommandName="DeleteDoctor"
+                                                        CommandArgument="<%# Container.DataItemIndex %>"
+                                                        CausesValidation="false"
+                                                        OnClientClick="return confirm('Are you sure you want to delete this doctor?');">
+                                                        <i class="bi bi-trash"></i> Delete
+                                                    </asp:LinkButton>
+                                                </div>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -270,13 +285,24 @@
 
                                         <asp:TemplateField HeaderText="Actions">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btnEditPatient" runat="server"
-                                                    CssClass="btn btn-sm btn-edit"
-                                                    CommandName="EditPatient"
-                                                    CommandArgument="<%# Container.DataItemIndex %>"
-                                                    CausesValidation="false">
-                                                    <i class="bi bi-pencil-square"></i> Edit
-                                                </asp:LinkButton>
+                                                <div class="action-buttons">
+                                                    <asp:LinkButton ID="btnEditPatient" runat="server"
+                                                        CssClass="btn btn-sm btn-edit"
+                                                        CommandName="EditPatient"
+                                                        CommandArgument="<%# Container.DataItemIndex %>"
+                                                        CausesValidation="false">
+                                                        <i class="bi bi-pencil-square"></i> Edit
+                                                    </asp:LinkButton>
+
+                                                    <asp:LinkButton ID="btnDeletePatient" runat="server"
+                                                        CssClass="btn btn-sm btn-delete"
+                                                        CommandName="DeletePatient"
+                                                        CommandArgument="<%# Container.DataItemIndex %>"
+                                                        CausesValidation="false"
+                                                        OnClientClick="return confirm('Are you sure you want to delete this patient?');">
+                                                        <i class="bi bi-trash"></i> Delete
+                                                    </asp:LinkButton>
+                                                </div>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
