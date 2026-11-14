@@ -30,7 +30,7 @@
 
             <div class="nav-right">
                 <i class="bi bi-person-gear me-1"></i>
-                Doctor Portal
+                Doctor
 
                 <a class="logout-link" href="login.aspx">
                     <i class="bi bi-box-arrow-right me-1"></i>
