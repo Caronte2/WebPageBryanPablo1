@@ -1,6 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
 
 namespace WebPageBryanPablo1.Pages
 {
@@ -14,7 +16,6 @@ namespace WebPageBryanPablo1.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             if (Session["UserId"] == null ||
                 Session["RoleId"] == null ||
                 Convert.ToInt32(Session["RoleId"]) != 3)
@@ -25,7 +26,8 @@ namespace WebPageBryanPablo1.Pages
 
             if (!IsPostBack)
             {
-                using (SQLiteConnection conn = new SQLiteConnection(GetConnectionString()))
+                using (SQLiteConnection conn =
+                    new SQLiteConnection(GetConnectionString()))
                 {
                     conn.Open();
                     LoadPatientProfile(conn);
@@ -36,24 +38,23 @@ namespace WebPageBryanPablo1.Pages
         private void LoadPatientProfile(SQLiteConnection conn)
         {
             int userId = Convert.ToInt32(Session["UserId"]);
+            int patientId = 0;
 
-           
-            string queryPatient = @"
-                SELECT 
-                    p.PatientId, 
-                    p.FullName, 
-                    p.DateOfBirth, 
-                    p.Address, 
+            string query = @"
+                SELECT
+                    p.PatientId,
+                    p.FullName,
+                    p.DateOfBirth,
+                    p.Address,
                     p.Mobile,
                     d.FullName AS DoctorName,
                     d.Mobile AS DoctorMobile
                 FROM Patients p
-                LEFT JOIN Doctors d ON p.DoctorId = d.DoctorId
+                LEFT JOIN Doctors d
+                    ON p.DoctorId = d.DoctorId
                 WHERE p.UserId = @UserId";
 
-            int patientId = 0;
-
-            using (SQLiteCommand cmd = new SQLiteCommand(queryPatient, conn))
+            using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@UserId", userId);
 
@@ -63,39 +64,131 @@ namespace WebPageBryanPablo1.Pages
                     {
                         patientId = Convert.ToInt32(reader["PatientId"]);
 
-                        
                         lblFullName.Text = reader["FullName"].ToString();
                         lblDateOfBirth.Text = reader["DateOfBirth"].ToString();
                         lblAddress.Text = reader["Address"].ToString();
                         lblMobile.Text = reader["Mobile"].ToString();
 
-                        
-                        lblDoctorName.Text = reader["DoctorName"] != DBNull.Value ? reader["DoctorName"].ToString() : "No assigned doctor";
-                        lblDoctorMobile.Text = reader["DoctorMobile"] != DBNull.Value ? reader["DoctorMobile"].ToString() : "N/A";
+                        lblDoctorName.Text =
+                            reader["DoctorName"] == DBNull.Value
+                            ? "Not assigned"
+                            : reader["DoctorName"].ToString();
+
+                        lblDoctorMobile.Text =
+                            reader["DoctorMobile"] == DBNull.Value
+                            ? "Not available"
+                            : reader["DoctorMobile"].ToString();
                     }
                     else
                     {
-                        lblMessage.Text = "No patient profile was found for this account.";
+                        lblMessage.Text = "Patient information not found.";
                         return;
                     }
                 }
             }
 
-            
-            string queryRecords = @"
-                SELECT 
+            LoadNextAppointment(conn, patientId);
+            LoadMedicalRecords(conn, patientId);
+        }
+
+        private void LoadNextAppointment(
+            SQLiteConnection conn,
+            int patientId)
+        {
+            string today = DateTime.Now.ToString("yyyy-MM-dd");
+            string currentTime = DateTime.Now.ToString("HH:mm");
+
+            string query = @"
+                SELECT
                     AppointmentDate,
-                    Diagnosis,
-                    Treatment
+                    AppointmentTime,
+                    Reason,
+                    Status
+                FROM Appointments
+                WHERE PatientId = @PatientId
+                  AND Status = 'Pending'
+                  AND (
+                        AppointmentDate > @Today
+                        OR (
+                            AppointmentDate = @Today
+                            AND AppointmentTime >= @CurrentTime
+                        )
+                  )
+                ORDER BY AppointmentDate ASC, AppointmentTime ASC
+                LIMIT 1";
+
+            using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@PatientId", patientId);
+                cmd.Parameters.AddWithValue("@Today", today);
+                cmd.Parameters.AddWithValue("@CurrentTime", currentTime);
+
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        DateTime appointmentDate;
+
+                        string dateValue =
+                            reader["AppointmentDate"].ToString();
+
+                        if (DateTime.TryParseExact(
+                            dateValue,
+                            "yyyy-MM-dd",
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out appointmentDate))
+                        {
+                            lblNextAppointmentDate.Text =
+                                appointmentDate.ToString("dd/MM/yyyy");
+                        }
+                        else
+                        {
+                            lblNextAppointmentDate.Text = dateValue;
+                        }
+
+                        lblNextAppointmentTime.Text =
+                            reader["AppointmentTime"].ToString();
+
+                        lblNextAppointmentReason.Text =
+                            reader["Reason"].ToString();
+
+                        lblNextAppointmentStatus.Text =
+                            reader["Status"].ToString();
+
+                        lblNextAppointmentMessage.Text =
+                            "Your next appointment is scheduled.";
+                    }
+                    else
+                    {
+                        lblNextAppointmentDate.Text = "-";
+                        lblNextAppointmentTime.Text = "-";
+                        lblNextAppointmentReason.Text = "-";
+                        lblNextAppointmentStatus.Text = "-";
+
+                        lblNextAppointmentMessage.Text =
+                            "You have no upcoming appointments.";
+                    }
+                }
+            }
+        }
+
+        private void LoadMedicalRecords(
+            SQLiteConnection conn,
+            int patientId)
+        {
+            string query = @"
+                SELECT AppointmentDate, Diagnosis, Treatment
                 FROM MedicalRecords
                 WHERE PatientId = @PatientId
                 ORDER BY AppointmentDate DESC";
 
-            using (SQLiteCommand cmdRec = new SQLiteCommand(queryRecords, conn))
+            using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
             {
-                cmdRec.Parameters.AddWithValue("@PatientId", patientId);
+                cmd.Parameters.AddWithValue("@PatientId", patientId);
 
-                using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmdRec))
+                using (SQLiteDataAdapter adapter =
+                    new SQLiteDataAdapter(cmd))
                 {
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -110,6 +203,7 @@ namespace WebPageBryanPablo1.Pages
         {
             Session.Clear();
             Session.Abandon();
+
             Response.Redirect("~/Pages/login.aspx");
         }
     }

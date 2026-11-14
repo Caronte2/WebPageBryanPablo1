@@ -180,22 +180,74 @@ body {
     overflow-x: auto;
 }
 
-.records-table {
+.table-wrapper {
     width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+    overflow-x: auto;
+    border: 1px solid #e1eaf3;
+    border-radius: 10px;
 }
 
+.records-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    background: white;
+}
+
+    /* Table header */
     .records-table th {
-        background: #eaf3fc;
-        padding: 15px;
+        background: #123b65;
+        color: white;
+        padding: 16px 18px;
         font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
     }
 
+        /* Rounded header corners */
+        .records-table th:first-child {
+            border-top-left-radius: 9px;
+        }
+
+        .records-table th:last-child {
+            border-top-right-radius: 9px;
+        }
+
+    /* Table cells */
     .records-table td {
-        padding: 15px;
+        padding: 17px 18px;
         border-bottom: 1px solid #e9eef4;
-        font-size: 13px;
+        font-size: 14px;
+        color: #405a73;
+        line-height: 1.5;
+        vertical-align: middle;
+    }
+
+    /* Alternating rows */
+    .records-table tr:nth-child(even) td {
+        background-color: #f5f9fd;
+    }
+
+    /* Hover effect */
+    .records-table tr:hover td {
+        background-color: #eaf3fc;
+        transition: background-color 0.2s ease;
+    }
+
+    /* Remove last row border */
+    .records-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Empty table message */
+    .records-table tr td[colspan] {
+        text-align: center;
+        padding: 25px;
+        color: #8295a8;
+        font-style: italic;
     }
 
 .action-edit,
@@ -270,5 +322,10 @@ body {
 
     .navbar {
         padding: 12px 4%;
+    }
+    .records-table th,
+    .records-table td {
+        padding: 12px;
+        font-size: 12px;
     }
 }

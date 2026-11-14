@@ -25,7 +25,7 @@ namespace WebPageBryanPablo1.Pages
                 return;
             }
 
-            // Mostrar la pestaña seleccionada en cada carga.
+            
             ShowActiveTab();
 
             if (!IsPostBack)
