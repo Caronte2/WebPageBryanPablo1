@@ -71,8 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\administrator.css" />
+    <Content Include="css\doctor.css" />
     <Content Include="css\index.css" />
     <Content Include="css\login.css" />
+    <Content Include="css\patient.css" />
     <Content Include="index.aspx" />
     <Content Include="Pages\administrator.aspx" />
     <Content Include="Pages\doctor.aspx" />

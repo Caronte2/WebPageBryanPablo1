@@ -6,7 +6,7 @@
     padding: 0;
 }
 
-/* Navbar */
+
 
 .main-navbar {
     background-color: #123b65;
@@ -40,7 +40,6 @@
     padding: 8px 14px !important;
 }
 
-/* Main content */
 
 .admin-container {
     min-height: 85vh;
@@ -58,7 +57,7 @@
     margin-bottom: 0;
 }
 
-/* Statistics cards */
+
 
 .stat-card {
     background-color: #ffffff;
@@ -109,7 +108,7 @@
     margin: 0;
 }
 
-/* Content cards */
+
 
 .content-card {
     background-color: #ffffff;
@@ -143,7 +142,7 @@
     font-size: 30px;
 }
 
-/* Forms */
+
 
 .form-label {
     color: #263445;
@@ -165,7 +164,7 @@
         box-shadow: 0 0 0 0.2rem rgba(23, 105, 170, 0.15);
     }
 
-/* Buttons */
+
 
 .btn-primary {
     background-color: #1769aa;
@@ -181,7 +180,7 @@
         border-color: #123b65;
     }
 
-/* Tables */
+
 
 .admin-table {
     width: 100%;
@@ -211,7 +210,7 @@
             border-bottom: none;
         }
 
-/* Messages */
+
 
 .message-label {
     display: block;
@@ -220,7 +219,7 @@
     color: #dc3545;
 }
 
-/* Footer */
+
 
 .main-footer {
     background-color: #123b65;
@@ -234,7 +233,7 @@
         font-size: 13px;
     }
 
-/* Responsive design */
+
 
 @media (max-width: 991px) {
     .main-navbar .nav-link {

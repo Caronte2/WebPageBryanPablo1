@@ -24,6 +24,7 @@
             <div class="container">
 
                 <a class="navbar-brand fw-bold" href="index.aspx">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>
                     HealthCare Plus
                 </a>
 
@@ -94,7 +95,7 @@
                             and well-being.
                         </p>
 
-                        <a href="Login.aspx" class="btn btn-primary btn-lg mt-3">
+                        <a href="../Pages/login.aspx" class="btn btn-primary btn-lg mt-3">
                             Access Patient Portal
                         </a>
 
