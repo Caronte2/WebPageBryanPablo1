@@ -1,7 +1,4 @@
-﻿
-/* GENERAL */
-
-body {
+﻿body {
     font-family: Arial, sans-serif;
     background-color: #f5f8fc;
     color: #263445;
@@ -10,7 +7,7 @@ body {
 }
 
 
-/* NAVBAR */
+
 
 .main-navbar {
     background-color: #123b65;
@@ -41,18 +38,18 @@ body {
     }
 
 
-/* LOGIN SECTION */
+
 
 .login-section {
     min-height: 75vh;
     display: flex;
     align-items: center;
-    padding: 60px 0;
+    padding: 61.5px 0;
     background-color: #eaf3fc;
 }
 
 
-/* LOGIN CARD */
+
 
 .login-card {
     border: none;
@@ -62,7 +59,7 @@ body {
 }
 
 
-/* LOGIN HEADER */
+
 
 .login-icon {
     color: #1769aa;
@@ -74,7 +71,7 @@ body {
 }
 
 
-/* FORM INPUTS */
+
 
 .login-card .form-label {
     color: #263445;
@@ -92,7 +89,7 @@ body {
     }
 
 
-/* VALIDATION */
+
 
 .login-card .text-danger {
     font-size: 13px;
@@ -103,7 +100,7 @@ body {
 }
 
 
-/* LOGIN BUTTON */
+
 
 .login-card .btn-primary {
     background-color: #1769aa;
@@ -120,7 +117,7 @@ body {
     }
 
 
-/* BACK TO HOME */
+
 
 .back-home {
     color: #1769aa;
@@ -134,7 +131,7 @@ body {
     }
 
 
-/* FOOTER */
+
 
 .main-footer {
     background-color: #123b65;
@@ -147,7 +144,7 @@ body {
     }
 
 
-/* RESPONSIVE DESIGN */
+
 
 @media (max-width: 768px) {
 

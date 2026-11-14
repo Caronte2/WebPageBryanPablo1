@@ -1,5 +1,4 @@
-﻿/* Corrección del selector universal (asegúrate de que tenga el asterisco) */
-* {
+﻿* {
     box-sizing: border-box;
 }
 
@@ -15,11 +14,23 @@ body {
 .navbar {
     background-color: #123b65;
     color: white;
-    padding: 12px 5%; 
+    padding: 18px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 60px; 
+}
+
+.navbar-brand,
+.navbar-brand:link,
+.navbar-brand:visited,
+.navbar-brand:hover,
+.navbar-brand:active {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.navbar-brand i {
+    color: white !important;
 }
 
 .brand {
@@ -44,8 +55,6 @@ body {
 
 .nav-right {
     font-size: 14px;
-    display: flex;
-    align-items: center;
 }
 
 .container {
@@ -287,7 +296,7 @@ body {
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 7px;
-    padding: 6px 12px; 
+    padding: 8px 14px;
     margin-left: 15px;
     font-size: 14px;
     transition: 0.3s;

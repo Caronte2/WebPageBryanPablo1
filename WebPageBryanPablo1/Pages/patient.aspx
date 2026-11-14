@@ -11,19 +11,28 @@
 <body>
     <form id="form1" runat="server">
 
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <i class="bi bi-heart-pulse"></i>
-                Health Centre
-            </div>
+        <header class="navbar">
+    <div class="brand">
+        <a class="navbar-brand" href="../index.aspx">
+            <i class="bi bi-heart-pulse-fill me-2"></i>
+            Health Centre
+        </a>
+    </div>
 
-            <asp:Button
-                ID="btnLogout"
-                runat="server"
-                Text="Logout"
-                CssClass="btn"
-                OnClick="btnLogout_Click" />
-        </nav>
+    <div class="nav-right">
+        <i class="bi bi-person-fill me-1"></i>
+        Patient
+
+        <asp:LinkButton
+            ID="btnLogout"
+            runat="server"
+            CssClass="logout-link"
+            OnClick="btnLogout_Click">
+            <i class="bi bi-box-arrow-right me-1"></i>
+            Log out
+        </asp:LinkButton>
+    </div>
+</header>
 
         <main class="container">
 
@@ -141,7 +150,9 @@
 </section>
 
         </main>
-
+        <footer class="footer">
+            <p>© Health Centre - Medical Management System</p>
+        </footer>
     </form>
 </body>
 </html>
