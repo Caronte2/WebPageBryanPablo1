@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <title>Patient - Health Centre</title>
-    <link href="../css/doctor.css" rel="stylesheet" />
+    <link href="../css/patient.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 <body>
@@ -109,30 +109,36 @@
 
             
             <section class="panel">
-                <h2>Medical Records History</h2>
+    <div class="panel-header">
+        <h2>Medical Records History</h2>
+        <p>View your previous medical consultations and treatments.</p>
+    </div>
 
-                <asp:GridView
-                    ID="gvMedicalRecords"
-                    runat="server"
-                    AutoGenerateColumns="False"
-                    CssClass="table"
-                    EmptyDataText="No medical records found.">
+    <div class="table-wrapper">
+        <asp:GridView
+            ID="gvMedicalRecords"
+            runat="server"
+            AutoGenerateColumns="False"
+            CssClass="records-table"
+            GridLines="None"
+            EmptyDataText="No medical records found.">
 
-                    <Columns>
-                        <asp:BoundField
-                            DataField="AppointmentDate"
-                            HeaderText="Date" />
+            <Columns>
+                <asp:BoundField
+                    DataField="AppointmentDate"
+                    HeaderText="Date" />
 
-                        <asp:BoundField
-                            DataField="Diagnosis"
-                            HeaderText="Diagnosis" />
+                <asp:BoundField
+                    DataField="Diagnosis"
+                    HeaderText="Diagnosis" />
 
-                        <asp:BoundField
-                            DataField="Treatment"
-                            HeaderText="Treatment" />
-                    </Columns>
-                </asp:GridView>
-            </section>
+                <asp:BoundField
+                    DataField="Treatment"
+                    HeaderText="Treatment" />
+            </Columns>
+        </asp:GridView>
+    </div>
+</section>
 
         </main>
 

@@ -19,7 +19,7 @@
 <body>
     <form id="form1" runat="server">
 
-        <!-- NAVBAR -->
+        
         <header class="navbar">
             <div class="brand">
                 <a class="navbar-brand" href="../index.aspx">
@@ -40,7 +40,7 @@
 
         <main class="container">
 
-            <!-- PAGE HEADER -->
+            
             <section class="page-header">
                 <div>
                     <h1>Doctor Dashboard</h1>
@@ -53,17 +53,17 @@
                 </div>
             </section>
 
-            <!-- MESSAGE -->
+            
             <asp:Label ID="lblMessage" runat="server"
                 CssClass="message" />
 
-            <!-- ACTIVE TAB -->
+            
             <asp:HiddenField
                 ID="hfActiveTab"
                 runat="server"
                 Value="records" />
 
-            <!-- TABS -->
+            
             <div class="tabs-container">
 
                 <asp:Button
@@ -85,13 +85,11 @@
             </div>
 
 
-            <!-- ================================= -->
-            <!-- TAB 1: PATIENTS RECORDS            -->
-            <!-- ================================= -->
+            
 
             <asp:Panel ID="pnlRecords" runat="server">
 
-                <!-- MEDICAL RECORD MANAGEMENT -->
+                
                 <section class="panel">
 
                     <div class="panel-header">
@@ -185,7 +183,7 @@
                 </section>
 
 
-                <!-- MEDICAL RECORDS TABLE -->
+                
                 <section class="panel records-panel">
 
                     <div class="panel-header">
@@ -263,9 +261,7 @@
             </asp:Panel>
 
 
-            <!-- ================================= -->
-            <!-- TAB 2: CREATE APPOINTMENT          -->
-            <!-- ================================= -->
+            
 
             <asp:Panel
                 ID="pnlAppointments"
@@ -283,7 +279,7 @@
 
                     <div class="form-grid">
 
-                        <!-- PATIENT -->
+                        
                         <div class="form-group">
                             <label>Patient</label>
 
@@ -294,7 +290,7 @@
                             </asp:DropDownList>
                         </div>
 
-                        <!-- DATE -->
+                        
                         <div class="form-group">
                             <label>Appointment Date</label>
 
@@ -306,7 +302,7 @@
                             </asp:TextBox>
                         </div>
 
-                        <!-- TIME -->
+                       
                         <div class="form-group">
                             <label>Appointment Time</label>
 
@@ -318,7 +314,7 @@
                             </asp:TextBox>
                         </div>
 
-                        <!-- REASON -->
+                        
                         <div class="form-group full-width">
                             <label>Reason for Appointment</label>
 
@@ -334,7 +330,7 @@
 
                     </div>
 
-                    <!-- BUTTON -->
+                    
                     <div class="form-actions">
 
                         <asp:Button
@@ -352,7 +348,7 @@
 
         </main>
 
-        <!-- FOOTER -->
+        
         <footer class="footer">
             <p>© Health Centre - Medical Management System</p>
         </footer>

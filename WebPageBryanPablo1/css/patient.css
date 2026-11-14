@@ -11,15 +11,15 @@ body {
     color: #123b65;
 }
 
-/* Navbar optimizado y blindado contra conflictos externos */
+
 .navbar {
     background-color: #123b65;
     color: white;
-    padding: 12px 5%; /* Reducido ligeramente para evitar altura excesiva */
+    padding: 12px 5%; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 60px; /* Altura controlada */
+    min-height: 60px; 
 }
 
 .brand {
@@ -195,7 +195,7 @@ body {
     background: white;
 }
 
-    /* Table header */
+    
     .records-table th {
         background: #123b65;
         color: white;
@@ -207,7 +207,7 @@ body {
         white-space: nowrap;
     }
 
-        /* Rounded header corners */
+        
         .records-table th:first-child {
             border-top-left-radius: 9px;
         }
@@ -216,7 +216,7 @@ body {
             border-top-right-radius: 9px;
         }
 
-    /* Table cells */
+    
     .records-table td {
         padding: 17px 18px;
         border-bottom: 1px solid #e9eef4;
@@ -226,23 +226,23 @@ body {
         vertical-align: middle;
     }
 
-    /* Alternating rows */
+    
     .records-table tr:nth-child(even) td {
         background-color: #f5f9fd;
     }
 
-    /* Hover effect */
+    
     .records-table tr:hover td {
         background-color: #eaf3fc;
         transition: background-color 0.2s ease;
     }
 
-    /* Remove last row border */
+    
     .records-table tr:last-child td {
         border-bottom: none;
     }
 
-    /* Empty table message */
+    
     .records-table tr td[colspan] {
         text-align: center;
         padding: 25px;
@@ -272,12 +272,12 @@ body {
     font-weight: bold;
 }
 
-/* Footer controlado */
+
 .footer {
     background: #123b65;
     color: white;
     text-align: center;
-    padding: 15px; /* Reducido para que no quede muy alto */
+    padding: 15px; 
     font-size: 13px;
     margin-top: 40px;
 }
@@ -287,7 +287,7 @@ body {
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 7px;
-    padding: 6px 12px; /* Ajustado para mejor proporción */
+    padding: 6px 12px; 
     margin-left: 15px;
     font-size: 14px;
     transition: 0.3s;

@@ -2,9 +2,13 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     margin: 0;
     padding: 0;
+    min-height: 100%;
+}
+
+body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #eaf3fc;
     color: #123b65;
@@ -19,6 +23,19 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+.navbar-brand,
+.navbar-brand:link,
+.navbar-brand:visited,
+.navbar-brand:hover,
+.navbar-brand:active {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+    .navbar-brand i {
+        color: white !important;
+    }
 
 .brand {
     font-size: 22px;
@@ -49,11 +66,11 @@ body {
     width: 90%;
     max-width: 1200px;
     margin: 35px auto;
-    min-height: 70vh;
+    flex: 1;
+    min-height:76.8vh;
 }
 
-
-.page-header {
+    .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -93,7 +110,7 @@ body {
     background: white;
     padding: 25px;
     border-radius: 12px;
-    margin-bottom: 25px;
+    margin-bottom: 100px;
     box-shadow: 0 3px 12px rgba(18, 59, 101, 0.07);
 }
 
@@ -229,7 +246,9 @@ body {
     text-align: center;
     padding: 20px;
     font-size: 13px;
-    margin-top: 40px;
+    margin-top: 0;
+    width: 100%;
+    flex-shrink: 0;
 }
 
 .logout-link {
@@ -255,7 +274,7 @@ body {
     border-bottom: 2px solid #d6e1ec;
 }
 
-/* Tab buttons */
+
 
 .tab-button {
     background: transparent;
@@ -271,14 +290,14 @@ body {
     margin-bottom: -2px;
 }
 
-    /* Hover */
+    
 
     .tab-button:hover {
         color: #123b65;
         background-color: rgba(18, 59, 101, 0.05);
     }
 
-    /* Active tab */
+   
 
     .tab-button.active {
         color: #123b65;
@@ -286,13 +305,13 @@ body {
         background-color: transparent;
     }
 
-    /* Focus */
+   
 
     .tab-button:focus {
         outline: none;
     }
 
-/* Appointment panel consistency */
+
 
 .panel {
     background-color: #ffffff;
